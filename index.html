@@ -10,10 +10,10 @@
     --accent:#0ea15a; --accent-d:#0b7e46; --accent2:#1763cf; --gold:#e0a008;
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth;background:#05070f;
+  html{scroll-behavior:smooth;background:#05070f;overflow-x:hidden;
     background:radial-gradient(circle at 18% 8%, #0d1838 0%, #070b1a 45%, #04060e 100%) fixed}
   body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    color:var(--ink);line-height:1.6;background:transparent;position:relative}
+    color:var(--ink);line-height:1.6;background:transparent;position:relative;overflow-x:hidden}
 
   /* FUTURISTIC BACKGROUND */
   #bg{position:fixed;inset:0;width:100%;height:100%;z-index:-2;display:block}
@@ -42,7 +42,7 @@
   .lang button.active{background:#fff;color:var(--accent-d)}
 
   /* HERO */
-  .hero{margin:0 -26px 0;padding:72px 26px 56px;color:#fff;position:relative;overflow:hidden;
+  .hero{margin:0;padding:72px 26px 56px;color:#fff;position:relative;overflow:hidden;
     background:
       linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px) 0 0/44px 44px,
       linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px) 0 0/44px 44px,
@@ -350,70 +350,4 @@
 
   <!-- CTA -->
   <div class="cta" id="contact">
-    <h2 data-ru="Салон, магазин, кафе или услуги? Покажу, что у вас можно автоматизировать" data-kz="Салон, дүкен, кафе немесе қызмет көрсетесіз бе? Нені автоматтандыруға болатынын көрсетемін">Салон, магазин, кафе или услуги? Покажу, что у вас можно автоматизировать</h2>
-    <p data-ru="Если у вас салон, магазин, кафе, услуга или любой другой бизнес — за 20 минут бесплатно разберу 2–3 процесса и покажу, где вы теряете время и деньги. Без обязательств." data-kz="Егер сізде салон, дүкен, кафе, қызмет немесе кез келген басқа бизнес болса — 20 минутта тегін 2–3 процесті талдап, уақыт пен ақшаңызды қайдан жоғалтып жатқаныңызды көрсетемін. Міндеттемесіз.">Если у вас салон, магазин, кафе, услуга или любой другой бизнес — за 20 минут бесплатно разберу 2–3 процесса и покажу, где вы теряете время и деньги. Без обязательств.</p>
-    <div class="contacts">
-      <a class="wa" href="https://wa.me/77714485833" target="_blank" rel="noopener">WhatsApp · +7 771 448 58 33</a>
-      <a class="tg" href="https://t.me/Turedin" target="_blank" rel="noopener">Telegram · @Turedin</a>
-      <a href="tel:+77714485833" data-ru="Позвонить" data-kz="Қоңырау шалу">Позвонить</a>
-    </div>
-  </div>
-
-</div>
-
-<script>
-(function(){
-  // language toggle
-  var btns=document.querySelectorAll('.lang button');
-  function applyLang(l){
-    document.querySelectorAll('[data-ru]').forEach(function(el){
-      var v=el.getAttribute('data-'+l);
-      if(v!=null) el.innerHTML=v;
-    });
-    document.documentElement.lang=l;
-    btns.forEach(function(b){b.classList.toggle('active',b.getAttribute('data-lang')===l);});
-  }
-  btns.forEach(function(b){b.addEventListener('click',function(){applyLang(b.getAttribute('data-lang'));});});
-
-  // futuristic neural-network background
-  (function(){
-    var c=document.getElementById('bg'),x=c.getContext('2d'),W,H,P=[],DPR=Math.min(window.devicePixelRatio||1,2);
-    function size(){W=c.width=innerWidth*DPR;H=c.height=innerHeight*DPR;c.style.width=innerWidth+'px';c.style.height=innerHeight+'px';}
-    size();
-    var N=Math.min(70,Math.round(innerWidth/22));
-    for(var i=0;i<N;i++)P.push({x:Math.random()*W,y:Math.random()*H,
-      vx:(Math.random()-.5)*.25*DPR,vy:(Math.random()-.5)*.25*DPR});
-    var LINK=130*DPR, mx=-9999,my=-9999;
-    addEventListener('mousemove',function(e){mx=e.clientX*DPR;my=e.clientY*DPR;});
-    addEventListener('resize',function(){size();});
-    function loop(){
-      x.clearRect(0,0,W,H);
-      for(var i=0;i<P.length;i++){var p=P[i];p.x+=p.vx;p.y+=p.vy;
-        if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;}
-      for(var i=0;i<P.length;i++){var a=P[i];
-        for(var j=i+1;j<P.length;j++){var b=P[j],dx=a.x-b.x,dy=a.y-b.y,d=Math.sqrt(dx*dx+dy*dy);
-          if(d<LINK){x.strokeStyle='rgba(80,170,255,'+(0.16*(1-d/LINK))+')';x.lineWidth=DPR;
-            x.beginPath();x.moveTo(a.x,a.y);x.lineTo(b.x,b.y);x.stroke();}}
-        var mdx=a.x-mx,mdy=a.y-my,md=Math.sqrt(mdx*mdx+mdy*mdy);
-        if(md<LINK*1.6){x.strokeStyle='rgba(45,212,160,'+(0.28*(1-md/(LINK*1.6)))+')';x.lineWidth=DPR;
-          x.beginPath();x.moveTo(a.x,a.y);x.lineTo(mx,my);x.stroke();}
-        x.fillStyle='rgba(130,200,255,.65)';x.beginPath();x.arc(a.x,a.y,1.6*DPR,0,6.283);x.fill();}
-      requestAnimationFrame(loop);
-    }
-    loop();
-  })();
-
-  // drag-to-scroll tariffs
-  var wrap=document.getElementById('twrap');
-  var down=false,startX=0,scl=0,moved=false;
-  wrap.addEventListener('mousedown',function(e){down=true;moved=false;startX=e.pageX;scl=wrap.scrollLeft;wrap.classList.add('drag');});
-  window.addEventListener('mouseup',function(){down=false;wrap.classList.remove('drag');});
-  wrap.addEventListener('mouseleave',function(){down=false;wrap.classList.remove('drag');});
-  wrap.addEventListener('mousemove',function(e){
-    if(!down)return;e.preventDefault();moved=true;
-    wrap.scrollLeft=scl-(e.pageX-startX);
-  });
-})();
-</script>
-</body>
-</html>
+    <h2 data-ru="Салон, магазин, кафе или услуги? Покажу, что у вас можно автоматизировать" data-kz="Салон, дүкен, кафе немесе қызмет көрсетесіз бе? Нені автоматтандыруға болатынын көрсетемін">Сал�
